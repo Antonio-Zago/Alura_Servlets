@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.connector.Response;
+
 /**
  * Servlet implementation class NovaEmpresaServlet
  */
@@ -45,11 +47,18 @@ public class NovaEmpresaServlet extends HttpServlet {
 		Banco banco = new Banco();
 		banco.adiciona(empresa);
 		
+		//Redirecionamento pelo navegador
+		// *Boa pratica, pois se faço o redirecionamento com o Servlet
+		// *como abaixo, se atualizo a pagina ele faz inumeras inserções, 
+		// *no banco de dados, pois está chamando o Servlet novaEmpresa.
+		// *Chamando dessa forma, ele redireciona pelo navegador
+		response.sendRedirect("listaEmpresas");
 		
-		//Criando objeto para dispachar para o JSP
-		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresaCriada3.jsp");
-		request.setAttribute("empresa", empresa.getNome());
-		rd.forward(request, response);
+		
+//		//Criando objeto para dispachar para o JSP
+//		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas"); //Chamando outro servlet
+//		request.setAttribute("empresa", empresa.getNome());
+//		rd.forward(request, response);
 		
 
 	}

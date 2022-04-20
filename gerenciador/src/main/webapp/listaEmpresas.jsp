@@ -21,7 +21,7 @@
 			<li>
 				${empresa.nome } -  <!-- Acessa o getNome() -->
 				<fmt:formatDate value="${empresa.dataAbertura}" pattern="dd/MM/yyyy"/>
-				
+				<a href="/gerenciador/RemoveEmpresasServlet?id=${empresa.id}">Remover</a>
 			</li>
 		</c:forEach>
 	</ul>
