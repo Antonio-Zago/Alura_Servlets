@@ -6,6 +6,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<c:url value="UpdadeEmpresasServlet" var="linkServletUpdateEmpresa"/>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,21 +16,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Lista de Empresas:<br>
-	
-	<ul>
-		<c:forEach items="${empresas }" var="empresa">
-			
-			<li>
-				${empresa.nome } -  <!-- Acessa o getNome() -->
-				<fmt:formatDate value="${empresa.dataAbertura}" pattern="dd/MM/yyyy"/>
-				<a href="/gerenciador/RemoveEmpresasServlet?id=${empresa.id}">Remover</a>
-				<a href="/gerenciador/MostraEmpresasServlet?id=${empresa.id}">Atualizar</a>
-			</li>
-		</c:forEach>
-	</ul>
-	
-	
 
+	
+	<form action="${linkServletUpdateEmpresa}" method="post">
+	
+		<input type="text" name="nome" value="${empresa.nome }">
+		<input type="text" name="data" value="<fmt:formatDate value="${empresa.dataAbertura}" pattern="dd/MM/yyyy"/>">
+		<input type="hidden" name="id" value="${empresa.id}">
+		
+		<input type="submit">
+	</form>
 </body>
 </html>
