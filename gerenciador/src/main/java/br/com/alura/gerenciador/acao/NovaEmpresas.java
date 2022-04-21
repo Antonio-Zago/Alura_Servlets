@@ -1,4 +1,4 @@
-package br.com.alura.gerenciador.servlet;
+package br.com.alura.gerenciador.acao;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,25 +7,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.alura.gerenciador.modelo.Banco;
 import br.com.alura.gerenciador.modelo.Empresa;
 
-/**
- * Servlet implementation class NovaEmpresaServlet
- */
-//@WebServlet("/novaEmpresa")
-public class NovaEmpresaServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class NovaEmpresas implements Acao{
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		PrintWriter out = response.getWriter();
-			
+		
 		String nomeEmpresa = request.getParameter("nome");//Recebe o parametro da URL
 		String data = request.getParameter("data");
 		
@@ -52,7 +44,9 @@ public class NovaEmpresaServlet extends HttpServlet {
 		// *como abaixo, se atualizo a pagina ele faz inumeras inserções, 
 		// *no banco de dados, pois está chamando o Servlet novaEmpresa.
 		// *Chamando dessa forma, ele redireciona pelo navegador
-		response.sendRedirect("listaEmpresas");
+
+		
+		return "redirect:UnicaEntradaServlet?acao=ListaEmpresas";
 		
 		
 //		//Criando objeto para dispachar para o JSP
@@ -60,7 +54,6 @@ public class NovaEmpresaServlet extends HttpServlet {
 //		request.setAttribute("empresa", empresa.getNome());
 //		rd.forward(request, response);
 		
-
 	}
 
 }
